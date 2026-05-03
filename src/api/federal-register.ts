@@ -84,18 +84,22 @@ export interface FederalRegisterClientConfig {
 export class FederalRegisterClient {
   constructor(private readonly config: FederalRegisterClientConfig) {}
 
-  private get fetcher(): typeof fetch {
-    return this.config.fetchImpl ?? fetch;
-  }
-
   private async request<T>(path: string, schema: z.ZodSchema<T>): Promise<T> {
     const url = `${this.config.baseUrl}${path}`;
-    const response = await this.fetcher(url, {
+    const init: RequestInit = {
       headers: {
         "User-Agent": this.config.userAgent,
         Accept: "application/json",
       },
-    });
+    };
+
+    // Cloudflare Workers requires fetch to be called with its global `this`
+    // binding. A getter or stored reference detaches that binding and
+    // produces "Illegal invocation" errors. Calling fetch directly from
+    // the top-level identifier preserves correct binding.
+    const response = this.config.fetchImpl
+      ? await this.config.fetchImpl(url, init)
+      : await fetch(url, init);
 
     if (!response.ok) {
       throw new FederalRegisterApiError(
