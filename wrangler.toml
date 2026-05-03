@@ -13,7 +13,7 @@ compatibility_flags = ["nodejs_compat"]
 # Then paste the resulting ID here
 [[kv_namespaces]]
 binding = "WATCHLISTS"
-id = "PLACEHOLDER_UPDATE_AFTER_NAMESPACE_CREATE"
+id = "d5fc8d923c2344e085ef288b8173c805"
 
 # Cron trigger — runs hourly to poll watchlists for changes
 [triggers]
