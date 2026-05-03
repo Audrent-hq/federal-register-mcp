@@ -1,0 +1,34 @@
+name = "federal-register-mcp"
+main = "src/index.ts"
+compatibility_date = "2026-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Default route — final URL configured via custom domain post-deploy
+# routes = [
+#   { pattern = "mcp.audrent.com/federal-register/*", custom_domain = true }
+# ]
+
+# KV namespace for watchlist storage
+# Run: wrangler kv:namespace create WATCHLISTS
+# Then paste the resulting ID here
+[[kv_namespaces]]
+binding = "WATCHLISTS"
+id = "PLACEHOLDER_UPDATE_AFTER_NAMESPACE_CREATE"
+
+# Cron trigger — runs hourly to poll watchlists for changes
+[triggers]
+crons = ["0 * * * *"]
+
+# Variables (non-secret)
+[vars]
+FR_API_BASE = "https://www.federalregister.gov/api/v1"
+USER_AGENT = "audrent-federal-register-mcp/1.0 (audr@audrent.com)"
+
+# Secrets — set via: wrangler secret put SECRET_NAME
+# Required:
+#   STRIPE_API_KEY              - for subscription verification
+#   X402_RECEIVING_ADDRESS      - USDC wallet address for x402 payments
+# Set after first deploy.
+
+[observability]
+enabled = true
