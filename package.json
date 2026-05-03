@@ -1,6 +1,6 @@
 {
   "name": "@audrent/federal-register-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server providing AI agents structured access to U.S. Federal Register documents and change-detection watchlists.",
   "license": "MIT",
   "author": "Audrent <audr@audrent.com>",
@@ -20,8 +20,8 @@
     "format": "prettier --write \"src/**/*.ts\""
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.5.0",
-    "zod": "^3.23.8"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250101.0",
@@ -29,7 +29,7 @@
     "prettier": "^3.3.0",
     "typescript": "^5.6.0",
     "vitest": "^2.1.0",
-    "wrangler": "^3.85.0"
+    "wrangler": "^4.87.0"
   },
   "engines": {
     "node": ">=20.0.0"
